@@ -107,7 +107,7 @@ services:
     container_name: loadgenerator
 
   zuul-gateway:
-    build: ./src/pzuul-gateway
+    build: ./src/zuul-gateway
     image: ${IMAGE_PREFIX}zuul-gateway:1.0.0-SNAPSHOT
     container_name: zuul-gateway
     environment:
