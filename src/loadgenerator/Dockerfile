@@ -1,5 +1,5 @@
 FROM python:3.6-slim as base
-
+COPY sources.list /etc/apt/sources.list
 FROM base as builder
 
 RUN apt-get -qq update \
@@ -8,9 +8,11 @@ RUN apt-get -qq update \
 
 COPY requirements.txt .
 
+COPY pip.conf ~/.pip/pip.conf
 RUN pip install --prefix=/install -r requirements.txt
 
 FROM base
+COPY sources.list /etc/apt/sources.list
 COPY --from=builder /install /usr/local
 
 COPY . .
