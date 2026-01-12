@@ -31,38 +31,12 @@ spec:
         - name: MODE
           value: standalone
         - name: PREFER_HOST_MODE
-          value: ip
-        - name: BASE_DIR
-          value: /home/nacos
-        - name: CLASSPATH
-          value: '.:/home/nacos/conf:'
-        - name: CLUSTER_CONF
-          value: /home/nacos/conf/cluster.conf
-        - name: FUNCTION_MODE
-          value: all
-        - name: JAVA_HOME
-          value: /usr/lib/jvm/java-1.8-openjdk
-        - name: NACOS_USER
-          value: nacos
-        - name: JAVA
-          value: /usr/lib/jvm/java-1.8-openjdk/bin/java
-        - name: JVM_XMS
-          value: 2g
-        - name: JVM_XMX
-          value: 2g
-        - name: JVM_XMN
-          value: 1g
-        - name: JVM_MS
-          value: 128m
-        - name: JVM_MMS
-          value: 320m
-        - name: NACOS_DEBUG
-          value: "n"
-        - name: TOMCAT_ACCESSLOG_ENABLED
-          value: "false"
+          value: hostname
+        - name: NACOS_AUTH_ENABLE
+          value: false
         - name: TIME_ZONE
           value: Asia/Shanghai
-        image: nacos/nacos-server:latest
+        image: nacos/nacos-server:2.0.2
         imagePullPolicy: Always
         name: nacos-server
         ports:
@@ -72,6 +46,9 @@ spec:
           requests:
             cpu: 250m
             memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
