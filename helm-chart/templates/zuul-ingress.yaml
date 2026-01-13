@@ -6,15 +6,16 @@ metadata:
   name: zuul-ingress
 spec:
   rules:
-  - http:
+  - host: zuul.example.com
+    http:
       paths:
-      - backend:
+      - path: /
+        pathType: Prefix
+        backend:
           service:
             name: zuul-gateway-svc
             port:
               number: 80
-        path: /
-        pathType: ImplementationSpecific
 status:
   loadBalancer:
     ingress:
