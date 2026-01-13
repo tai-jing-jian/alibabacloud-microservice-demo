@@ -41,3 +41,26 @@ spec:
           limits:
             cpu: 500m
             memory: 1Gi
+        # 存活检查
+        livenessProbe:
+          httpGet:
+            path: /nacos/actuator/health
+            port: 8848
+          initialDelaySeconds: 60  # 增加初始延迟
+          periodSeconds: 30
+          failureThreshold: 5      # 增加失败阈值
+          timeoutSeconds: 10
+        # 就绪检查
+        readinessProbe:
+          httpGet:
+            path: /nacos/actuator/health
+            port: 8848
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
+          timeoutSeconds: 5
+        # 生命周期钩子，优雅关闭
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh", "-c", "curl -X POST http://localhost:8848/nacos/v1/ns/instance/beat"]
