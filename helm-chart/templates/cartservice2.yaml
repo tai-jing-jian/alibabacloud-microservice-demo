@@ -29,7 +29,7 @@ spec:
       containers:
       - env:
         - name: throwException
-          value: "false"
+          value: "true"
         - name: spring.cloud.nacos.discovery.server-addr
           value: {{ .Values.mse.address.springcloud}}
         - name: dubbo.registry.address
